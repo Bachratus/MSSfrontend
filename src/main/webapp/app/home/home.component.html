@@ -1,0 +1,16 @@
+<div class="row">
+    <p class="lead">To jest twoja strona domowa</p>
+    <div [ngSwitch]="account !== null">
+      <div class="alert alert-success" *ngSwitchCase="true">
+        <span id="home-logged-message" *ngIf="account">Jesteś zalogowany jako użytkownik "{{ account.login }}".</span>
+      </div>
+      <div class="alert alert-warning" *ngSwitchCase="false">
+        <span>Jeśli chcesz się </span>
+        <a class="alert-link" (click)="login()">zalogować</a
+        ><span
+          >, możesz spróbować któregoś z domyślnych kont:<br />- Administrator (login="admin" i hasło="admin") <br />- Użytkownik
+          (login="user" i hasło="user").</span
+        >
+      </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <div *ngIf="getAccount" class="navigation">
+    <router-outlet name="navbar"></router-outlet>
+  </div>
+
+  <div class="card">
+    <router-outlet></router-outlet>
+    <p-toast></p-toast>
+    <p-confirmDialog></p-confirmDialog>
+  </div>
+</div>

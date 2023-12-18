@@ -1,0 +1,8 @@
+<div class="wrapper">
+  <mss-table [values]="tasks" [columns]="cols" (selectionChange)="selectionChange($event)"> </mss-table>
+  <div class="flex justify-content-center mb-3">
+    <p-button styleClass="ui-button_size_125 fit-content" (onClick)="addTask()" label="Dodaj"
+      [disabled]="!selectedTask">
+    </p-button>
+  </div>
+</div>

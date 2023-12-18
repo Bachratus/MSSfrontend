@@ -1,0 +1,30 @@
+<mss-form (formSubmition)="save()" [formGroup]="registerForm" [twoColumns]="true">
+  <mss-form-section>
+    <mss-form-control>
+      <span class="p-float-label">
+        <input pInputText id="login" formControlName="login" />
+        <label htmlFor="login">Nazwa użytkownika</label>
+      </span>
+    </mss-form-control>
+    <mss-form-control>
+      <span class="p-float-label">
+        <input pInputText id="firstName" formControlName="firstName" />
+        <label htmlFor="firstName">Imię</label>
+      </span>
+    </mss-form-control>
+  </mss-form-section>
+  <mss-form-section>
+    <mss-form-control>
+      <span class="p-float-label">
+        <input pInputText id="lastName" formControlName="lastName" />
+        <label htmlFor="lastName">Nazwisko</label>
+      </span>
+    </mss-form-control>
+    <mss-form-control>
+      <span class="p-float-label">
+        <input pInputText id="email" formControlName="email" />
+        <label htmlFor="email">Email</label>
+      </span>
+    </mss-form-control>
+  </mss-form-section>
+</mss-form>

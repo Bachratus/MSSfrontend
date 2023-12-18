@@ -1,0 +1,59 @@
+:host ::ng-deep {
+  .p-scroller::-webkit-scrollbar-track {
+    background-color: transparent !important;
+  }
+
+  .p-scroller::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover) !important;
+  }
+
+  .p-scroller::-webkit-scrollbar-thumb {
+    background: var(--primary-color) !important;
+    border-radius: 0.5rem !important;
+  }
+
+  .p-scroller::-webkit-scrollbar {
+    width: 8px !important;
+  }
+}
+
+div.spinner,
+.noData {
+  display: flex;
+  justify-content: space-around;
+}
+
+div.spinner {
+  font-size: 3rem;
+}
+
+.noData {
+  background: var(--surface-200);
+}
+
+div.flex:nth-child(2) {
+  margin-left: .5rem;
+}
+
+:host ::ng-deep {
+  .p-scroller.p-scroller-inline {
+    height: 100%;
+  }
+
+  .p-datatable .p-datatable-tbody>tr>td {
+    max-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .p-datatable .p-datatable-tbody>tr>th {
+    max-width: 0;
+  }
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

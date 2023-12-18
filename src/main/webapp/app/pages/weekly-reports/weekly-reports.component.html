@@ -1,0 +1,92 @@
+<div class="main">
+  <div class="summary-table">
+    <mss-table [columns]="weeklyReportsCols" dataKey="userId" [values]="weeklySummaries" [showCalendar]="true"
+      [(selection)]="selectedWeeklySummary" (selectionChange)="selectionChange()" [loading]="weeklySummaries.length===0"
+      calendarType="week" minWidth="10rem" [(dateRange)]="dateRange" [(datesInRange)]="datesInRange"
+      (calendarClosure)="onCalendarClosure()">
+    </mss-table>
+  </div>
+  <div class="detail-table">
+    <p-table #dt editMode="row" [value]="weeklyTaskReports" [tableStyle]="{ 'width': '100%', 'min-width':'750px' }"
+      class="edit-table" dataKey="taskId" styleClass="p-datatable-gridlines p-datatable-sm" [scrollable]="true"
+      [scrollHeight]="'calc(100vh - 142px)'">
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <span class="worker">
+            {{selectedWeeklySummary?.name}} {{selectedWeeklySummary?.surname}}
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 27%;" class="text-center">Projekt - zadanie</th>
+          <th style="width: 9%;" *ngFor="let date of datesInRange">
+            <div class="flex-column align-items-center">
+              <div style="text-align: center">{{ date | dayShortcut}}</div>
+              <div style="text-align: center">{{ date | date: 'dd' }}</div>
+            </div>
+          </th>
+          <th style="width: 10%;"></th>
+        </tr>
+        <tr *ngIf="weekSummary.length > 0" class="break">
+          <th *ngFor="let num of '. '.repeat(8).split('.'); let i = index"></th>
+        </tr>
+        <tr *ngIf="weekSummary.length > 0">
+          <th class="text-center"><strong>Suma</strong></th>
+          <ng-container *ngFor="let daySum of weekSummary let i = index">
+            <th class="text-center"><strong>{{daySum}}</strong></th>
+          </ng-container>
+          <th class="text-center"><strong>-</strong></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-weeklyTaskReport let-editing="editing" let-ri="rowIndex">
+        <tr *ngIf="!isLoadingDetails" [pEditableRow]="weeklyTaskReport"
+          [class]="defaultTasksIds.includes(weeklyTaskReport.taskId) ? 'default-row' : '' ">
+          <td class="text-center">
+            <strong>{{weeklyTaskReport.subprojectCode}}</strong> {{weeklyTaskReport.projectName}} <br>
+            {{weeklyTaskReport.taskName}}
+          </td>
+          <ng-container *ngFor="let dailyReport of weeklyTaskReport.dailyReports let i = index">
+            <td class="text-center">
+              <p-cellEditor>
+                <ng-template pTemplate="input" class="w-full">
+                  <input class="text-center" pInputText type="number" [(ngModel)]="dailyReport.totalHours" required>
+                </ng-template>
+                <ng-template pTemplate="output" class="w-full">
+                  {{ dailyReport.totalHours }}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+          </ng-container>
+          <td class="text-center">
+            <button *ngIf="!defaultTasksIds.includes(weeklyTaskReport.taskId)" pButton pRipple type="button"
+              icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"
+              (click)="deleteTask(weeklyTaskReport)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <ng-container>
+          <tr *ngIf="!isLoadingDetails && weeklyTaskReports?.length === 0">
+            <td [attr.colspan]="getColspan()" style="width: 100%; text-align: center; justify-content: center">
+              Brak danych
+            </td>
+          </tr>
+          <tr *ngIf="isLoadingDetails">
+            <td [attr.colspan]="getColspan()" class="spinner">
+                <div><i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i></div>
+            </td>
+          </tr>
+        </ng-container>
+      </ng-template>
+    </p-table>
+    <div class="flex justify-content-center">
+      <p-button styleClass="ui-button_size_125 fit-content mr-1" label="Dodaj"
+        [disabled]="selectedWeeklySummary===null || isLoadingDetails" (onClick)="addTask()">
+      </p-button>
+      <p-button styleClass="ui-button_size_125 fit-content" (onClick)="save()" label="Zapisz tydzień"
+        [disabled]="weeklyTaskReports.length===0">
+      </p-button>
+    </div>
+  </div>
+</div>

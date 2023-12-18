@@ -1,0 +1,104 @@
+.main {
+  width: 100%;
+  height: calc(100vh - 40px);
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: auto 1fr auto;
+  grid-column-gap: 2px;
+  grid-row-gap: 2px;
+}
+
+.calendar {
+  grid-area: 1 / 1 / 2 / 3;
+  display: flex;
+  align-items: center;
+}
+
+.summary-table {
+  grid-area: 2 / 1 / 4 / 2;
+}
+
+.detail-table {
+  grid-area: 2 / 2 / 3 / 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.worker {
+  height: 1.55rem;
+  padding-top: .2rem;
+  color: white;
+}
+
+:host ::ng-deep {
+  .p-datatable-wrapper {
+    &::-webkit-scrollbar {
+      width: 12px !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 0.5rem !important;
+      background: var(--ente-menu-scrollbar-thumb) !important;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--ente-menu-scrollbar-thumb-hover) !important;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--ente-menu-scrollbar-track) !important;
+      background-color: transparent !important;
+    }
+  }
+
+  p-celleditor .p-inputtext {
+    width: 100%;
+  }
+
+  .p-calendar .p-inputtext {
+    width: 185px;
+  }
+
+  .fit-content.p-button {
+    width: fit-content !important;
+  }
+
+  .edit-table {
+    .p-datatable-thead {
+      &>tr>th {
+        border-top: 0;
+        border-bottom: 0;
+      }
+
+      &>tr.break>th {
+        background-color: var(--surface-100);
+        height: 1px;
+        padding: 0;
+      }
+    }
+
+    .p-datatable-tbody>tr.default-row>td {
+      background-color: var(--primary-hover);
+    }
+
+    .p-button {
+      padding: .3rem .6rem;
+    }
+  }
+}
+
+.spinner {
+  background-color: transparent !important;
+  border: none;
+  div{
+    display: flex;
+    justify-content: center;
+  }
+}
+
+::ng-deep swz-weekly-report table.p-datatable-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}

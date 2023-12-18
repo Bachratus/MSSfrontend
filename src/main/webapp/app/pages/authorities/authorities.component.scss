@@ -1,0 +1,17 @@
+.pageWrapper{
+  height: calc(100vh - 40px);
+  display: grid;
+  grid-template-rows: calc(100% - 40px) 40px;
+}
+
+.tablesWrapper{
+  height: 100%;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  gap: 1rem;
+}
+
+.actions{
+  display: flex;
+  justify-content: center;
+}

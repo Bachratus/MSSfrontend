@@ -1,0 +1,12 @@
+<div class="pageWrapper">
+  <div class="tablesWrapper">
+    <mss-table [values]="users" [columns]="usersCols" [loading]="loadingUsers" [(selection)]="selectedUser"
+      (selectionChange)="onUserSelectinChange($event)"></mss-table>
+    <mss-table [values]="authorities" [columns]="authoritiesCols" [loading]="loadingAuthorities" minWidth="20rem"
+      [multiSelectionDisabled]="!selectedUser" dataKey="name" selectionMode="multiple"
+      [(selections)]="selectedAuthorities"></mss-table>
+  </div>
+  <div class="actions">
+    <p-button (onClick)="save()" [disabled]="!selectedUser">Zapisz</p-button>
+  </div>
+</div>

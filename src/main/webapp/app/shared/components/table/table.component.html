@@ -1,0 +1,82 @@
+<!-- [(selection)]="selectionMode==='single' ? selection : selections"    PRZYPISZE SELECTIONS -->
+<!-- [(selection)]="selectionMode==='multiple' ? selections : selection"    PRZYPISZE SELECTION -->
+<p-table [value]="filteredValues" [tableStyle]="{ 'min-width': minWidth }" [dataKey]="dataKey"
+  [selectionMode]="selectionMode" [(selection)]="selectionMode==='single' ? selection : selections"
+  [(selection)]="selectionMode==='multiple' ? selections : selection" (selectionChange)="emitSelectionChange()"
+  [scrollable]="true" scrollHeight="flex" [virtualScroll]="true" [resizableColumns]="true">
+  <ng-template pTemplate="caption">
+    <div class="flex justify-content-between">
+      <div class="flex">
+        <p-calendar *ngIf="showCalendar && calendarType === 'date'" [readonlyInput]="true" dateFormat="dd.mm.yy"
+          [(ngModel)]="date" [showIcon]="true" (ngModelChange)="emitDateChange()">
+        </p-calendar>
+        <p-calendar *ngIf="showCalendar && calendarType === 'datetime'" [readonlyInput]="true" [showTime]="true"
+          dateFormat="dd.mm.yy" [(ngModel)]="date" [showIcon]="true" (ngModelChange)="emitDateChange()">
+        </p-calendar>
+        <p-calendar *ngIf="showCalendar && calendarType === 'daterange'" [(ngModel)]="dateRange"
+          (ngModelChange)="emitDateRangeChange()" (onSelect)="onDateChange($event)" (onClose)="onCalendarClosure()"
+          selectionMode="range" [readonlyInput]="true" dateFormat="dd.mm.yy" [showIcon]="true">
+        </p-calendar>
+        <p-calendar #calendar *ngIf="showCalendar && calendarType === 'week'" [(ngModel)]="dateRange"
+          (ngModelChange)="emitDateRangeChange()" (onSelect)="onDateChange($event)" (onClose)="onCalendarClosure()"
+          selectionMode="range" [readonlyInput]="true" [firstDayOfWeek]="1" dateFormat="dd.mm.yy" [showIcon]="true">
+        </p-calendar>
+        <p-calendar *ngIf="showCalendar && calendarType === 'month'" [(ngModel)]="date" view="month" dateFormat="mm/yy"
+          [showIcon]="true" [readonlyInput]="true" (ngModelChange)="emitDateChange()"></p-calendar>
+      </div>
+      <div class="flex">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input type="text" pInputText [(ngModel)]="filterText" (input)="filterData()" />
+        </span>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngIf="selectionMode === 'multiple'">
+        <p-tableHeaderCheckbox [disabled]="multiSelectionDisabled"></p-tableHeaderCheckbox>
+      </th>
+      <th *ngFor="let col of columns" pResizableColumn [pSortableColumn]="col.field">
+        {{ col.header }} <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template *ngIf="selectionMode==='single'" pTemplate="body" let-item>
+    <ng-container *ngIf="!loading">
+      <tr [pSelectableRow]="item">
+        <td *ngFor="let col of columns" [pTooltip]="item[col.field]" tooltipPosition="bottom" [showDelay]="500">
+          {{ item[col.field] }}
+        </td>
+      </tr>
+    </ng-container>
+  </ng-template>
+
+  <ng-template *ngIf="selectionMode==='multiple'" pTemplate="body" let-item let-rowIndex="rowIndex">
+    <ng-container *ngIf="!loading">
+      <tr>
+        <td>
+          <p-tableCheckbox [disabled]="multiSelectionDisabled" [value]="item"></p-tableCheckbox>
+        </td>
+        <td *ngFor="let col of columns" [pTooltip]="item[col.field]" tooltipPosition="bottom" [showDelay]="500">
+          {{ item[col.field] }}
+        </td>
+      </tr>
+    </ng-container>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <tr>
+      <td *ngIf="loading" class="spinner" [attr.colspan]="columns.length">
+        <div class="spinner"><i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i></div>
+      </td>
+    </tr>
+    <tr *ngIf="!loading && values.length === 0">
+      <td [attr.colspan]="selectionMode==='multiple' ? columns.length + 1 : columns.length">
+        <div class="noData"><span>Brak danych</span></div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

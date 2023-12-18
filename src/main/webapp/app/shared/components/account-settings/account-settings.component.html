@@ -1,0 +1,31 @@
+<mss-form (formSubmition)="changePassword()" [formGroup]="resetPasswordForm" [saveLabel]="'Zapisz'">
+  <mss-form-section>
+    <mss-form-control>
+      <span class="p-float-label p-input-icon-right">
+        <i class="pi" [ngClass]="showCurrentPassword ? 'pi-eye-slash' : 'pi-eye'"
+          (click)="toggleShowCurrentPassword()"></i>
+        <input pInputText id="currentPassword" [type]="showCurrentPassword ? 'text':'password'"
+          formControlName="currentPassword" />
+        <label htmlFor="currentPassword">Aktualne hasło</label>
+      </span>
+    </mss-form-control>
+    <mss-form-control>
+      <span class="p-float-label p-input-icon-right">
+        <i class="pi" [ngClass]="showNewPassword ? 'pi-eye-slash' : 'pi-eye'"
+          (click)="toggleShowNewPassword()"></i>
+        <input pInputText id="newPassword" [type]="showNewPassword ? 'text':'password'"
+          formControlName="newPassword" />
+        <label htmlFor="newPassword">Nowe hasło</label>
+      </span>
+    </mss-form-control>
+    <mss-form-control>
+      <span class="p-float-label p-input-icon-right">
+        <i class="pi" [ngClass]="showNewPassword ? 'pi-eye-slash' : 'pi-eye'"
+          (click)="toggleShowNewPassword()"></i>
+        <input pInputText id="newPasswordConfirm" [type]="showNewPassword ? 'text':'password'"
+          formControlName="newPasswordConfirm" />
+        <label htmlFor="newPasswordConfirm">Potwierdź hasło</label>
+      </span>
+    </mss-form-control>
+  </mss-form-section>
+</mss-form>

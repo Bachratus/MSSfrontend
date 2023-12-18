@@ -1,0 +1,31 @@
+<div class="loginForm">
+  <h1 class="logo">MSS</h1>
+  <mss-form (formSubmition)="login()" [formGroup]="loginForm" [saveLabel]="'Zaloguj się'">
+    <mss-form-section>
+      <mss-form-control>
+        <span class="p-float-label">
+          <input pInputText id="username" formControlName="username" />
+          <label htmlFor="username">Nazwa użytkownika</label>
+        </span>
+      </mss-form-control>
+      <mss-form-control>
+        <span class="p-float-label p-input-icon-right" style="width:100%;">
+          <i class="pi" [ngClass]="showPassword ? 'pi-eye-slash' : 'pi-eye'" (click)="toggleShowPassword()"></i>
+          <input pInputText id="password" [type]="showPassword ? 'text':'password'" formControlName="password" />
+          <label htmlFor="password">Hasło</label>
+        </span>
+      </mss-form-control>
+      <mss-form-control>
+        <div class="items">
+          <div class="item">
+            <p-checkbox formControlName="rememberMe" inputId="rememberMe" [binary]="true"></p-checkbox>
+            <label class="ml-2" for="rememberMe">Zapamiętaj mnie</label>
+          </div>
+          <div class="item">
+            <span class="forgotPassword" (click)="showForgotPasswordDialog()">Zapomniałeś hasła?</span>
+          </div>
+        </div>
+      </mss-form-control>
+    </mss-form-section>
+  </mss-form>
+</div>

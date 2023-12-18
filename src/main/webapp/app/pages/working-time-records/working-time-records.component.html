@@ -1,0 +1,12 @@
+<div class="wrapper">
+    <h1 class="text-center">Przepracowane godziny w miesiącu</h1>
+    <div class="flex justify-content-center mt-4 mb-4">
+        <p-calendar [(ngModel)]="date" view="month" dateFormat="mm/yy" [showIcon]="true" [readonlyInput]="true"
+            (ngModelChange)="loadWorkHours()"></p-calendar>
+        <p-button class="ml-2 csv" icon="pi pi-file" [pTooltip]="'Eksportuj do CSV'" (onClick)="csvExport()"></p-button>
+    </div>
+    <p class="text-center">Godzin łącznie: {{hoursSum}}</p>
+    <div class="chart">
+        <canvas id="canvasId"></canvas>
+    </div>
+</div>

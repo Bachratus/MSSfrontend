@@ -1,0 +1,14 @@
+.form-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    form{
+        width: calc(100% - 2rem);
+        margin-top: 1rem;
+    }
+    .actions{
+        padding: 1rem 0;
+        display: flex;
+        justify-content: center;
+    }
+}

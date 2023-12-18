@@ -1,0 +1,10 @@
+<div class="form-wrapper">
+    <form (ngSubmit)="emitSubmit()" [formGroup]="formGroup">
+        <mss-form-section-wrapper [twoColumns]="twoColumns">
+            <ng-content></ng-content>
+        </mss-form-section-wrapper>
+        <div class="actions">
+            <p-button [disabled]="!formGroup.valid" type="submit" styleClass="p-button-sm">{{ saveLabel }}</p-button>
+        </div>
+    </form>
+</div>

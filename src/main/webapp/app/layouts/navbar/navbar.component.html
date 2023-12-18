@@ -1,0 +1,35 @@
+<div *ngIf="account" class="wrapper" [ngClass]="isNavbarCollapsed ? 'collapsed' : ''">
+  <div class="menu">
+    <div class="menu-controller">
+      <i class="pi pi-align-justify" (click)="toggleNavbar()"></i>
+    </div>
+    <div class="logo">
+      <span routerLink="/">MSS</span>
+    </div>
+    <div class="user-info" [ngClass]="getUserInfoClass()">
+      <span class="text-center">{{getUserFullName()}}</span>
+    </div>
+    <div class="actions">
+      <i *ngIf="account" class="pi pi-cog" (click)="showUserSettings()"></i>
+      <i *ngIf="account" class="pi pi-sign-out" (click)="logout()"></i>
+    </div>
+    <div *ngIf="!isNavbarCollapsed" class="filter">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText [(ngModel)]="filterValue" (ngModelChange)="filter()"/>
+      </span>
+    </div>
+    <div class="tabs">
+      <ng-container *ngFor="let tab of filteredTabs">
+        <div *jhiHasAnyAuthority="tab.authorities" class="tab" [routerLink]="[tab.route]" routerLinkActive="active">
+          <div class="icon">
+            <span><i [class]="tab.icon"></i></span>
+          </div>
+          <div *ngIf="!isNavbarCollapsed" class="label" [pTooltip]="tab.name">
+            <span>{{tab.name}}</span>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

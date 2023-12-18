@@ -1,0 +1,8 @@
+<div class="wrap">
+  <mss-table [values]="users" [columns]="cols" [loading]="loading" [(selection)]="selectedUser"></mss-table>
+  <div class="actions">
+    <p-button (onClick)="addNewUser()">Dodaj</p-button>
+    <p-button class="ml-2" (onClick)="editUser()" [disabled]="!selectedUser">Edytuj</p-button>
+    <p-button class="ml-2" (onClick)="deleteUser()" [disabled]="!selectedUser">Usuń</p-button>
+  </div>
+</div>

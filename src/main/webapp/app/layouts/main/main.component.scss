@@ -1,0 +1,14 @@
+.wrapper{
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    .navigation{
+        background-color: var(--surface-200);
+    }
+    .card{
+        padding: 20px;
+        background-color: var(--surface-100);
+        flex-grow: 1;
+        overflow: hidden;
+    }
+}

@@ -1,0 +1,9 @@
+.form-control-panel{
+    margin-top: 1.5rem;
+}
+
+::ng-deep{
+    .form-control-panel .p-inputtext{
+        width: 100%;
+    }
+}

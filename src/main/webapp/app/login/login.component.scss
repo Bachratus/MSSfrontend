@@ -1,0 +1,29 @@
+.loginForm{
+    position: absolute;
+    top: calc(50% - 250px);
+    left: calc(50% - 250px);
+    width: 500px;
+    height: 500px;
+}
+
+.logo{
+    padding-top: 2rem;
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.items{
+  display: flex;
+  justify-content: space-between;
+  .item{
+    display: flex;
+  }
+}
+
+span.forgotPassword{
+  color: var(--primary-color);
+  cursor: pointer;
+  font-weight: bold;
+}
