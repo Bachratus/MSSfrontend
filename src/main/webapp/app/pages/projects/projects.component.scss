@@ -1,0 +1,15 @@
+.wrap{
+    height: calc(100vh - 40px);
+    display: grid;
+    grid-template-rows: 60px calc(100% - 100px) 40px;
+}
+
+.actions{
+  display: flex;
+  justify-content: center;
+}
+
+.title{
+  font-size: 2rem;
+  text-align: center;
+}

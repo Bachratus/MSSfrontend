@@ -10,11 +10,27 @@ export class TaskService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) { }
 
+  findDefaultTasksIds(): Observable<number[]> {
+    return this.http.get<number[]>(`${this.resourceUrl}/default`);
+  }
+
   findAll(): Observable<HttpResponse<Task[]>> {
     return this.http.get<Task[]>(`${this.resourceUrl}`, { observe: 'response' });
   }
 
-  findDefaultTasksIds(): Observable<number[]> {
-    return this.http.get<number[]>(`${this.resourceUrl}/default`);
+  findAllForSubproject(id: number): Observable<HttpResponse<Task[]>> {
+    return this.http.get<Task[]>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  addTask(task: Task): Observable<HttpResponse<Task>> {
+    return this.http.post<Task>(`${this.resourceUrl}`, task, { observe: 'response' });
+  }
+
+  editTask(task: Task): Observable<HttpResponse<Task>> {
+    return this.http.put<Task>(`${this.resourceUrl}`, task, { observe: 'response' });
+  }
+
+  deleteTask(id: number): Observable<HttpResponse<{}>> {
+    return this.http.delete<HttpResponse<{}>>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 }
