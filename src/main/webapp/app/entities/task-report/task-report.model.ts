@@ -3,6 +3,8 @@ export class TaskReport {
     public id?: number,
     public projectId?: number,
     public subprojectId?: number,
+    public taskId?: number,
+    public userId?: number,
     public percent?: number | null,
     public status?: number | null,
     public description?: string | null,
@@ -10,5 +12,5 @@ export class TaskReport {
     public hours?: number | null,
     public flags?: number | null,
     public statusName?: string | null
-    ) {}
+  ) { }
 }
