@@ -1,0 +1,111 @@
+<mss-form *ngIf="type === 'addProject' || type === 'editProject'" (formSubmition)="save()" [formGroup]="projectForm"
+  [twoColumns]="true">
+  <mss-form-section>
+    <mss-form-control>
+      <span class="p-float-label">
+        <input pInputText id="name" formControlName="name" />
+        <label htmlFor="name">Nazwa</label>
+      </span>
+    </mss-form-control>
+    <mss-form-control>
+      <span class="p-float-label">
+        <input pInputText id="code" formControlName="code" />
+        <label htmlFor="code">Kod</label>
+      </span>
+    </mss-form-control>
+    <mss-form-control>
+      <span class="p-float-label">
+        <p-inputNumber inputId="hoursPredicted" formControlName="hoursPredicted"> </p-inputNumber>
+        <label for="hoursPredicted">Przewidywana ilość godzin</label>
+      </span>
+    </mss-form-control>
+  </mss-form-section>
+  <mss-form-section>
+    <mss-form-control>
+      <span class="p-float-label">
+        <p-calendar inputId="dateFrom" formControlName="dateFrom" appendTo="body" [showIcon]="true"></p-calendar>
+        <label for="dateFrom">Data od</label>
+      </span>
+    </mss-form-control>
+    <mss-form-control>
+      <span class="p-float-label">
+        <p-calendar inputId="dateTo" formControlName="dateTo" appendTo="body" [showIcon]="true"></p-calendar>
+        <label for="dateTo">Data do</label>
+      </span>
+    </mss-form-control>
+  </mss-form-section>
+</mss-form>
+
+<mss-form *ngIf="type === 'addSubproject' || type === 'editSubproject'" (formSubmition)="save()"
+  [formGroup]="subprojectForm" [twoColumns]="true">
+  <mss-form-section>
+    <mss-form-control>
+      <span class="p-float-label">
+        <input pInputText id="name" formControlName="name" />
+        <label htmlFor="name">Nazwa</label>
+      </span>
+    </mss-form-control>
+    <mss-form-control>
+      <span class="p-float-label">
+        <input pInputText id="code" formControlName="code" />
+        <label htmlFor="code">Kod</label>
+      </span>
+    </mss-form-control>
+    <mss-form-control>
+      <span class="p-float-label">
+        <p-inputNumber inputId="hoursPredicted" formControlName="hoursPredicted"> </p-inputNumber>
+        <label for="hoursPredicted">Przewidywana ilość godzin</label>
+      </span>
+    </mss-form-control>
+  </mss-form-section>
+  <mss-form-section>
+    <mss-form-control>
+      <span class="p-float-label">
+        <p-calendar inputId="dateFrom" formControlName="dateFrom" appendTo="body" [showIcon]="true"></p-calendar>
+        <label for="dateFrom">Data od</label>
+      </span>
+    </mss-form-control>
+    <mss-form-control>
+      <span class="p-float-label">
+        <p-calendar inputId="dateTo" formControlName="dateTo" appendTo="body" [showIcon]="true"></p-calendar>
+        <label for="dateTo">Data do</label>
+      </span>
+    </mss-form-control>
+    <mss-form-control>
+      <p-dropdown [options]="subprojectTypes" formControlName="subprojectType" optionLabel="name"
+        placeholder="Typ podprojektu" appendTo="body"></p-dropdown>
+    </mss-form-control>
+  </mss-form-section>
+</mss-form>
+
+<mss-form *ngIf="type === 'addTask' || type === 'editTask'" (formSubmition)="save()" [formGroup]="taskForm"
+  [twoColumns]="true">
+  <mss-form-section>
+    <mss-form-control>
+      <span class="p-float-label">
+        <input pInputText id="name" formControlName="name" />
+        <label htmlFor="name">Nazwa</label>
+      </span>
+    </mss-form-control>
+    <mss-form-control>
+      <span class="p-float-label">
+        <p-inputNumber inputId="hoursPredicted" formControlName="hoursPredicted"> </p-inputNumber>
+        <label for="hoursPredicted">Przewidywana ilość godzin</label>
+      </span>
+    </mss-form-control>
+  </mss-form-section>
+  <mss-form-section>
+    <mss-form-control>
+      <span class="p-float-label">
+        <p-calendar inputId="fromDate" formControlName="fromDate" appendTo="body" [showIcon]="true"></p-calendar>
+        <label for="fromDate">Data od</label>
+      </span>
+    </mss-form-control>
+    <mss-form-control>
+      <span class="p-float-label">
+        <p-calendar inputId="toDate" formControlName="toDate" appendTo="body" [showIcon]="true"></p-calendar>
+        <label for="toDate">Data do</label>
+      </span>
+    </mss-form-control>
+  </mss-form-section>
+</mss-form>

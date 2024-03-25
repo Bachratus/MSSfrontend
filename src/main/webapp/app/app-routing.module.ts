@@ -10,6 +10,7 @@ import { canActivateGuard } from './shared/auth/authGuard';
 import { AuthoritiesComponent } from './pages/authorities/authorities.component';
 import { WeeklyReportsComponent } from './pages/weekly-reports/weekly-reports.component';
 import { WorkingTimeRecordsComponent } from './pages/working-time-records/working-time-records.component';
+import { ProjectsComponent } from './pages/projects/projects.component';
 
 @NgModule({
   imports: [
@@ -29,25 +30,31 @@ import { WorkingTimeRecordsComponent } from './pages/working-time-records/workin
           path: 'users',
           component: UsersComponent,
           canActivate: [canActivateGuard],
-          data: {roles: [Authority.ADMIN, Authority.USERS_ADMINISTRATION]}
+          data: { roles: [Authority.ADMIN, Authority.USERS_ADMINISTRATION] }
         },
         {
           path: 'authorities',
           component: AuthoritiesComponent,
           canActivate: [canActivateGuard],
-          data: {roles: [Authority.ADMIN, Authority.USERS_ADMINISTRATION]},
+          data: { roles: [Authority.ADMIN, Authority.USERS_ADMINISTRATION] },
+        },
+        {
+          path: 'projects',
+          component: ProjectsComponent,
+          canActivate: [canActivateGuard],
+          data: { roles: [Authority.ADMIN, Authority.PROJECTS_ADMINISTRATION] }
         },
         {
           path: 'weekly-reports',
           component: WeeklyReportsComponent,
           canActivate: [canActivateGuard],
-          data: {roles: [Authority.ADMIN, Authority.WEEKLY_REPORTS]}
+          data: { roles: [Authority.ADMIN, Authority.WEEKLY_REPORTS] }
         },
         {
           path: 'working-time-records',
           component: WorkingTimeRecordsComponent,
           canActivate: [canActivateGuard],
-          data: {roles: [Authority.ADMIN, Authority.USER]}
+          data: { roles: [Authority.ADMIN, Authority.USER] }
         },
         ...errorRoute,
       ],
@@ -56,4 +63,4 @@ import { WorkingTimeRecordsComponent } from './pages/working-time-records/workin
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

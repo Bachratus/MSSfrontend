@@ -6,6 +6,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { WeeklySummary } from '../weekly-reports/weekly-summary.model';
 import { WeeklyTaskReport } from '../weekly-reports/weekly-task-report';
 import { UserReport } from './user-report.model';
+import { TaskReport } from './task-report.model';
 
 @Injectable({ providedIn: 'root' })
 export class TaskReportService {
@@ -15,6 +16,10 @@ export class TaskReportService {
   private cancelPendingDetailsForService = new Subject<void>();
 
   constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) { }
+
+  addReport(report: TaskReport): Observable<TaskReport> {
+    return this.http.post<TaskReport>(`${this.resourceUrl}`, report);
+  }
 
   getMonthlyUserReport(fromDate: string, toDate: string): Observable<HttpResponse<UserReport[]>> {
     return this.http.get<UserReport[]>(`${this.resourceUrl}/for-user/${fromDate}/${toDate}`, { observe: 'response' });
@@ -61,8 +66,8 @@ export class TaskReportService {
 
   getCSV(fromDate: string, toDate: string): Observable<HttpResponse<Blob>> {
     return this.http.post(`${this.resourceUrl}/summary-csv/${fromDate}/${toDate}`, {}, {
-        observe: 'response',
-        responseType: 'blob'
+      observe: 'response',
+      responseType: 'blob'
     });
-}
+  }
 }

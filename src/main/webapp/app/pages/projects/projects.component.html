@@ -1,0 +1,43 @@
+<div class="wrap">
+  <div class="title">
+    <span>{{ show === 'projects' ? 'Projekty' : (show === 'tasks' ? (selectedProject?.name + ' - ' +
+      selectedSubproject?.name +' - Zadania') :
+      (selectedProject?.name +' - Podprojekty')) }}</span>
+  </div>
+
+  <mss-table *ngIf="show === 'projects'" [values]="projects" [columns]="projectCols" [loading]="loadingProjects"
+    [(selection)]="selectedProject" (selectionChange)="loadSubprojects()"></mss-table>
+
+  <mss-table *ngIf="show === 'subprojects'" [values]="subprojects" [columns]="subprojectCols"
+    [loading]="loadingSubprojects" [(selection)]="selectedSubproject" (selectionChange)="loadTasks()"></mss-table>
+
+  <mss-table *ngIf="show === 'tasks'" [values]="tasks" [columns]="taskCols" [loading]="loadingTasks"
+    [(selection)]="selectedTask"></mss-table>
+
+  <div class="actions">
+
+    <p-button *ngIf="show === 'projects'" (onClick)="addProject()">Dodaj</p-button>
+    <p-button *ngIf="show === 'projects'" (onClick)="editProject()" class="ml-2"
+      [disabled]="!selectedProject">Edytuj</p-button>
+    <p-button *ngIf="show === 'projects'" (onClick)="deleteProject()" class="ml-2"
+      [disabled]="!selectedProject">Usuń</p-button>
+    <p-button *ngIf="show === 'projects'" class="ml-2" [disabled]="!selectedProject"
+      (onClick)="toggleView('subprojects')">Podprojekty</p-button>
+
+
+    <p-button *ngIf="show === 'subprojects'" (onClick)="toggleView('projects')">Projekty</p-button>
+    <p-button *ngIf="show === 'subprojects'" (onClick)="addSubproject()" class="ml-2">Dodaj</p-button>
+    <p-button *ngIf="show === 'subprojects'" (onClick)="editSubproject()" class="ml-2"
+      [disabled]="!selectedSubproject">Edytuj</p-button>
+    <p-button *ngIf="show === 'subprojects'" (onClick)="deleteSubproject()" class="ml-2"
+      [disabled]="!selectedSubproject">Usuń</p-button>
+    <p-button class="ml-2" *ngIf="show === 'subprojects'" [disabled]="!selectedSubproject"
+      (onClick)="toggleView('tasks')">Zadania</p-button>
+
+    <p-button *ngIf="show === 'tasks'" (onClick)="toggleView('subprojects')">Podprojekty</p-button>
+    <p-button *ngIf="show === 'tasks'" (onClick)="addTask()" class="ml-2">Dodaj</p-button>
+    <p-button *ngIf="show === 'tasks'" (onClick)="editTask()" class="ml-2" [disabled]="!selectedTask">Edytuj</p-button>
+    <p-button *ngIf="show === 'tasks'" (onClick)="deleteTask()" class="ml-2" (onClick)="deleteTask()"
+      [disabled]="!selectedTask">Usuń</p-button>
+  </div>
+</div>

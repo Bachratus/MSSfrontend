@@ -1,0 +1,17 @@
+:host ::ng-deep {
+
+    p-inputnumber,
+    .p-inputnumber {
+        display: block;
+    }
+
+    .p-dropdown {
+        width: 100%;
+    }
+
+
+    .p-dropdown {
+        background: var(--surface-50);
+        border: 1px solid var(--primary-hover);
+    }
+}

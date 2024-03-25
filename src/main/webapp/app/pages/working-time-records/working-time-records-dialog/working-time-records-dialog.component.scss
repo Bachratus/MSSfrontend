@@ -1,0 +1,33 @@
+:host ::ng-deep {
+
+    p-inputnumber,
+    .p-inputnumber {
+        display: block;
+    }
+
+    .p-dropdown {
+        width: 100%;
+    }
+
+    .p-calendar{
+        width: 100%;
+    }
+
+    .p-inputtext{
+        width: 100%;
+    }
+
+    .p-dropdown {
+        background: var(--surface-50);
+        border: 1px solid var(--primary-hover);
+    }
+
+    // .mt-2{
+    //     margin-top: 1rem;
+    // }
+
+    // .mt-3{
+    //     margin-top: 4rem;
+    // }
+}
+

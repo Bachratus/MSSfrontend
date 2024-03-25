@@ -3,6 +3,8 @@ import { DateService } from 'app/entities/date.service';
 import { TaskReportService } from 'app/entities/task-report/task-report.service';
 import { UserReport } from 'app/entities/task-report/user-report.model';
 import { Chart, CategoryScale, LinearScale, LineController, PointElement, LineElement, Filler } from 'chart.js';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { WorkingTimeRecordsDialogComponent } from './working-time-records-dialog/working-time-records-dialog.component';
 Chart.register(LinearScale, CategoryScale, LineController, PointElement, LineElement, Filler);
 
 @Component({
@@ -19,11 +21,25 @@ export class WorkingTimeRecordsComponent implements OnInit {
 
   constructor(
     private taskReportService: TaskReportService,
-    private dateService: DateService
+    private dateService: DateService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
     this.loadWorkHours();
+  }
+
+  addReport(): void {
+    const ref: DynamicDialogRef = this.dialogService.open(WorkingTimeRecordsDialogComponent, {
+      header: 'Dodaj raport',
+      width:'500px'
+    });
+
+    ref.onClose.subscribe(result => {
+      if (result?.success) {
+        this.loadWorkHours();
+      }
+    });
   }
 
   loadWorkHours(): void {

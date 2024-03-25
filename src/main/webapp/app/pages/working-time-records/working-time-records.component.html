@@ -6,6 +6,7 @@
         <p-button class="ml-2 csv" icon="pi pi-file" [pTooltip]="'Eksportuj do CSV'" (onClick)="csvExport()"></p-button>
     </div>
     <p class="text-center">Godzin łącznie: {{hoursSum}}</p>
+    <div><p-button size="small" class="ml-2" (onClick)="addReport()">Dodaj raport</p-button></div>
     <div class="chart">
         <canvas id="canvasId"></canvas>
     </div>
