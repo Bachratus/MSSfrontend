@@ -13,7 +13,6 @@ Chart.register(LinearScale, CategoryScale, LineController, PointElement, LineEle
   styleUrls: ['./working-time-records.component.scss']
 })
 export class WorkingTimeRecordsComponent implements OnInit {
-
   date: Date = new Date();
   workHours: UserReport[] = [];
   hoursSum = 0;
