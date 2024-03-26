@@ -2,10 +2,10 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { DateService } from 'app/entities/date.service';
 import { TaskReportService } from 'app/entities/task-report/task-report.service';
 import { UserReport } from 'app/entities/task-report/user-report.model';
-import { Chart, CategoryScale, LinearScale, LineController, PointElement, LineElement, Filler } from 'chart.js';
+import { Chart, CategoryScale, LinearScale, LineController, PointElement, LineElement, Filler, BarElement, BarController } from 'chart.js';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { WorkingTimeRecordsDialogComponent } from './working-time-records-dialog/working-time-records-dialog.component';
-Chart.register(LinearScale, CategoryScale, LineController, PointElement, LineElement, Filler);
+Chart.register(LinearScale, CategoryScale, LineController, PointElement, LineElement, Filler, BarElement, BarController);
 
 @Component({
   selector: 'mss-working-time-records',
@@ -31,7 +31,7 @@ export class WorkingTimeRecordsComponent implements OnInit {
   addReport(): void {
     const ref: DynamicDialogRef = this.dialogService.open(WorkingTimeRecordsDialogComponent, {
       header: 'Dodaj raport',
-      width:'500px'
+      width: '500px'
     });
 
     ref.onClose.subscribe(result => {
@@ -99,14 +99,14 @@ export class WorkingTimeRecordsComponent implements OnInit {
   initChart(): void {
     const labels: string[] = this.workHours.map(obj => {
       const dateParts = obj.date.split('-');
-      return `${dateParts[2]}.${dateParts[1]}`
+      return `${dateParts[2]}.${dateParts[1]}`;
     });
     const data: number[] = this.workHours.map(obj => obj.hours);
 
     const trendlineData = this.calculateTrendline(this.workHours);
 
     this.myChart = new Chart('canvasId', {
-      type: 'line',
+      type: 'bar',
       data: {
         labels,
         datasets: [
@@ -115,7 +115,8 @@ export class WorkingTimeRecordsComponent implements OnInit {
             backgroundColor: 'rgba(255, 255, 255, 0.87)',
             borderColor: 'rgba(255, 255, 255, 0.87)',
             borderWidth: 1,
-            fill: false
+            fill: false,
+            type: 'line'
           },
           {
             data,
@@ -130,6 +131,11 @@ export class WorkingTimeRecordsComponent implements OnInit {
         responsive: true,
         scales: {
           x: {
+            title: {
+              display: true,
+              text: 'Dni miesiąca',
+              color: '#93c5fd',
+            },
             grid: {
               color() {
                 return '#686e75';
@@ -140,6 +146,11 @@ export class WorkingTimeRecordsComponent implements OnInit {
             }
           },
           y: {
+            title: {
+              display: true,
+              text: 'Liczba przepracowanych godzin',
+              color: '#93c5fd',
+            },
             grid: {
               color() {
                 return '#686e75';
@@ -153,6 +164,7 @@ export class WorkingTimeRecordsComponent implements OnInit {
       }
     });
   }
+
 
   calculateTrendline(data: UserReport[]): number[] {
     let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
