@@ -102,6 +102,18 @@ export class WorkingTimeRecordsComponent implements OnInit {
       return `${dateParts[2]}.${dateParts[1]}`;
     });
     const data: number[] = this.workHours.map(obj => obj.hours);
+    const workHoursStates: number[] = this.workHours.map(obj => obj.status);
+    const statusColors = [
+      '#FF0000',
+      '#FF6347',
+      '#008000',
+      '#ADD8E6',
+      '#0000FF',
+      '#FFD700',
+      '#008000',
+    ];
+
+    const backgroundColors = workHoursStates.map(status => statusColors[status - 1] || '#008000');
 
     const trendlineData = this.calculateTrendline(this.workHours);
 
@@ -120,8 +132,8 @@ export class WorkingTimeRecordsComponent implements OnInit {
           },
           {
             data,
-            backgroundColor: '#93c5fd',
-            borderColor: '#93c5fd',
+            backgroundColor: backgroundColors,
+            borderColor: backgroundColors,
             borderWidth: 1,
             fill: true
           }
@@ -166,21 +178,23 @@ export class WorkingTimeRecordsComponent implements OnInit {
   }
 
 
-  calculateTrendline(data: UserReport[]): number[] {
+  calculateTrendline(data: UserReport[]): (number | null)[] {
+    const filteredData = data.filter(item => item.status !== 7);
+
     let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
-    const len = data.length;
+    const len = filteredData.length;
 
     for (let i = 0; i < len; i++) {
       sumX += i;
-      sumY += data[i].hours;
-      sumXY += i * data[i].hours;
+      sumY += filteredData[i].hours;
+      sumXY += i * filteredData[i].hours;
       sumX2 += i * i;
     }
 
     const slope = (len * sumXY - sumX * sumY) / (len * sumX2 - sumX * sumX);
     const intercept = (sumY - slope * sumX) / len;
 
-    return data.map((_, i) => slope * i + intercept);
+    return data.map((item, i) => item.status !== 7 ? slope * i + intercept : null);
   }
 
   @HostListener('window:resize', ['$event'])
