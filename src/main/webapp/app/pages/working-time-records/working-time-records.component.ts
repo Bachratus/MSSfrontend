@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { DateService } from 'app/entities/date.service';
 import { TaskReportService } from 'app/entities/task-report/task-report.service';
-import { UserReport } from 'app/entities/task-report/user-report.model';
+import { UserReport, WorkHoursStatus } from 'app/entities/task-report/user-report.model';
 import { Chart, CategoryScale, LinearScale, LineController, PointElement, LineElement, Filler, BarElement, BarController } from 'chart.js';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { WorkingTimeRecordsDialogComponent } from './working-time-records-dialog/working-time-records-dialog.component';
@@ -179,7 +179,7 @@ export class WorkingTimeRecordsComponent implements OnInit {
 
 
   calculateTrendline(data: UserReport[]): (number | null)[] {
-    const filteredData = data.filter(item => item.status !== 7);
+    const filteredData = data.filter(item => item.status !== WorkHoursStatus.No_Hours_On_Day_Off);
 
     let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
     const len = filteredData.length;
@@ -194,7 +194,7 @@ export class WorkingTimeRecordsComponent implements OnInit {
     const slope = (len * sumXY - sumX * sumY) / (len * sumX2 - sumX * sumX);
     const intercept = (sumY - slope * sumX) / len;
 
-    return data.map((item, i) => item.status !== 7 ? slope * i + intercept : null);
+    return data.map((item, i) => item.status !== WorkHoursStatus.No_Hours_On_Day_Off ? slope * i + intercept : null);
   }
 
   @HostListener('window:resize', ['$event'])
