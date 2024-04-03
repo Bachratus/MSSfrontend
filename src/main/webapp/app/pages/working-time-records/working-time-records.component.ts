@@ -17,6 +17,15 @@ export class WorkingTimeRecordsComponent implements OnInit {
   workHours: UserReport[] = [];
   hoursSum = 0;
   myChart: Chart | null = null;
+  statusColors = [
+    '#FF0000',
+    '#FF6347',
+    '#008000',
+    '#ADD8E6',
+    '#0000FF',
+    '#FFD700',
+    '#008000',
+  ];
 
   constructor(
     private taskReportService: TaskReportService,
@@ -103,17 +112,7 @@ export class WorkingTimeRecordsComponent implements OnInit {
     });
     const data: number[] = this.workHours.map(obj => obj.hours);
     const workHoursStates: number[] = this.workHours.map(obj => obj.status);
-    const statusColors = [
-      '#FF0000',
-      '#FF6347',
-      '#008000',
-      '#ADD8E6',
-      '#0000FF',
-      '#FFD700',
-      '#008000',
-    ];
-
-    const backgroundColors = workHoursStates.map(status => statusColors[status - 1] || '#008000');
+    const backgroundColors = workHoursStates.map(status => this.statusColors[status - 1] || '#008000');
 
     const trendlineData = this.calculateTrendline(this.workHours);
 
@@ -176,7 +175,6 @@ export class WorkingTimeRecordsComponent implements OnInit {
       }
     });
   }
-
 
   calculateTrendline(data: UserReport[]): (number | null)[] {
     const filteredData = data.filter(item => item.status !== WorkHoursStatus.No_Hours_On_Day_Off);
