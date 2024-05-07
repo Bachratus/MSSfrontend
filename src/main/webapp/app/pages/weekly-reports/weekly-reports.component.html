@@ -50,7 +50,7 @@
             <td class="text-center">
               <p-cellEditor>
                 <ng-template pTemplate="input" class="w-full">
-                  <input class="text-center" pInputText type="number" [(ngModel)]="dailyReport.totalHours" required>
+                  <input class="text-center" pInputText type="number" [min]="0" [max]="24" [(ngModel)]="dailyReport.totalHours" required>
                 </ng-template>
                 <ng-template pTemplate="output" class="w-full">
                   {{ dailyReport.totalHours }}

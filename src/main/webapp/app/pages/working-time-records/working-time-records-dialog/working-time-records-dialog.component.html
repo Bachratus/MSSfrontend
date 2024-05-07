@@ -1,40 +1,40 @@
 <div class="mt-2">
-    <p-dropdown [options]="projects" [(ngModel)]="selectedProject" optionLabel="name" placeholder="Projekt"
-        appendTo="body" (ngModelChange)="projectSelected()"></p-dropdown>
+  <p-dropdown [options]="projects" [(ngModel)]="selectedProject" optionLabel="name" placeholder="Projekt"
+    appendTo="body" (ngModelChange)="projectSelected()"></p-dropdown>
 </div>
 
 <div class="mt-2">
-    <p-dropdown [options]="subprojects" [(ngModel)]="selectedSubproject" optionLabel="name"
-        (ngModelChange)="subprojectSelected()" placeholder="Podprojekt" appendTo="body"
-        [disabled]="!selectedProject"></p-dropdown>
+  <p-dropdown [options]="subprojects" [(ngModel)]="selectedSubproject" optionLabel="name"
+    (ngModelChange)="subprojectSelected()" placeholder="Podprojekt" appendTo="body"
+    [disabled]="!selectedProject"></p-dropdown>
 </div>
 
 <div class="mt-2">
-    <p-dropdown [options]="tasks" [(ngModel)]="selectedTask" optionLabel="name" placeholder="Zadanie"
-        [disabled]="!selectedSubproject" appendTo="body"></p-dropdown>
+  <p-dropdown [options]="tasks" [(ngModel)]="selectedTask" optionLabel="name" placeholder="Zadanie"
+    [disabled]="!selectedSubproject" appendTo="body"></p-dropdown>
 </div>
 
 <div class="mt-5">
-    <span class="p-float-label">
-        <p-calendar inputId="dateFrom" [(ngModel)]="date" appendTo="body" [showIcon]="true"></p-calendar>
-        <label for="dateFrom">Data od</label>
-    </span>
+  <span class="p-float-label">
+    <p-calendar inputId="dateFrom" [(ngModel)]="date" appendTo="body" [showIcon]="true"></p-calendar>
+    <label for="dateFrom">Data od</label>
+  </span>
 </div>
 
 <div class="mt-5">
-    <span class="p-float-label">
-        <p-inputNumber inputId="hoursPredicted" [(ngModel)]="hours"></p-inputNumber>
-        <label for="hoursPredicted">Ilość godzin</label>
-    </span>
+  <span class="p-float-label">
+    <p-inputNumber inputId="hoursPredicted" [(ngModel)]="hours" [min]="0" [max]="24"></p-inputNumber>
+    <label for="hoursPredicted">Liczba godzin</label>
+  </span>
 </div>
 
 <div class="mt-5">
-    <span class="p-float-label">
-        <p-inputNumber inputId="hoursPredicted" [(ngModel)]="overtime"> </p-inputNumber>
-        <label for="hoursPredicted">Ilość nadgodzin</label>
-    </span>
+  <span class="p-float-label">
+    <p-inputNumber inputId="hoursPredicted" [(ngModel)]="overtime" [min]="0" [max]="24"> </p-inputNumber>
+    <label for="hoursPredicted">Liczba nadgodzin</label>
+  </span>
 </div>
 
 <div class="mt-5 text-center">
-    <p-button size="small" (onClick)="save()" [disabled]="!selectedTask || !date || !hours">Zapisz raport</p-button>
+  <p-button size="small" (onClick)="save()" [disabled]="!selectedTask || !date || !hours">Zapisz raport</p-button>
 </div>
